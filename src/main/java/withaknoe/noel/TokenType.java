@@ -1,12 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package withaknoe.noel;
 
 /**
  *
  * @author Brent
+ *      I use  https://designmodo.com/font-psychology/ to come up with 
+ *          terminology for some of the tokens (positions in this case)
  */
 public enum TokenType {
     // keywords
@@ -16,7 +14,7 @@ public enum TokenType {
     // puncuation
     COLON, COMMA, LPAREN, RPAREN,
     
-    // positions (base lines)
+    // positions (fancy font words, base lines)
     TOP, MIDDLE, BASE, DESCEND,
     
     // literals

@@ -1,8 +1,6 @@
 package withaknoe.noel;
 
 import java.util.*;
-
-
 /**
  *
  * @author Brent
@@ -58,7 +56,7 @@ public class Scanner {
            case ',': addToken(TokenType.COMMA); break;
            
            case '\n': line++; break;
-           case ' ':
+           case  ' ':
            case '\r':
            case '\t': break; //ignore white space
            default:
@@ -88,7 +86,6 @@ public class Scanner {
            advance(); // consume '.'
            while (isDigit(peek())) advance();
        }
-       
        String value = source.substring(start, current);
        addToken(TokenType.NUMERIC, Double.parseDouble(value));
    }

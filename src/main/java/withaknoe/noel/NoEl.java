@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package withaknoe.noel;
 
 import java.io.BufferedReader;
@@ -15,6 +11,8 @@ import java.util.List;
 /**
  *
  * @author Brent
+ *      Essentially the same REPL setup as Nystrom's.
+ * 
  */
 public class NoEl {
     static boolean hadError = false;
