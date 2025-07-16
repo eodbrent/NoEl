@@ -1,6 +1,6 @@
 # Handwriting Language Project
 
-This is an experimental project where I'm creating a simple, code-based language designed to generate handwriting and fonts. The idea is to encode each character using drawing instructions—essentially programming your own font or even your personal handwriting style.
+Inspired by Crafting Interpreters by Robert Nystrom (https://craftinginterpreters.com/), this is an experimental project where I'm creating a simple, code-based language designed to generate handwriting and fonts. The idea is to encode each character using drawing instructions - essentially programming your own font or even your personal handwriting style.
 
 ---
 
@@ -20,7 +20,7 @@ Example for a lowercase `i`:
 LETTER i
   STROKE 3 2 down line
   DOT 4 4 center circle
-END
+END i
 ```
 
 ---
@@ -32,7 +32,9 @@ END
   - Programmable letters as stroke instructions.
   - Randomization for natural, human-like variation.
   - Export to SVG or similar graphic formats.
-- Modular letter definitions—combine or inherit from other shapes.
+- Modular letter definitions - combine or inherit from other shapes.
+  - LETTER d uses a
+  - LETTER w uses v
 
 ---
 
@@ -53,16 +55,16 @@ END
 
 ## ⚙️ How to Run
 
-> ⚠️ **Not yet runnable** — project still in early development.
+> ⚠️ **Not yet runnable** - project still in early development.
 
 Once working:
 1. Compile the project:
-   ```bash
+   ```
    javac *.java
    ```
 
 2. Run:
-   ```bash
+   ```
    java HandwritingLangInterpreter
    ```
 
@@ -84,13 +86,13 @@ Inspired by the book [Crafting Interpreters](https://craftinginterpreters.com/),
 
 ## 🤝 Contributions
 
-This is currently a personal learning project, but feel free to fork or experiment with the idea.
+This is currently a personal learning project, shared with one other person - Dwayne F.
 
 ---
 
 ## 📄 License
 
-Educational and experimental—no formal license assigned yet.
+Educational and experimental - no formal license assigned yet.
 
 ---
 
