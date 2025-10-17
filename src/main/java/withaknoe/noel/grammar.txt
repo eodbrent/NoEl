@@ -1,0 +1,34 @@
+program          -> initial+ declaration inherit? declaration "{" instructionBlock "}"
+
+initial          -> "letter" | "number" | "symbol" | "other"
+declaration      -> LETTERDEC | NUMBERDEC | SYMBOLDEC | OTHERDEC | nil
+inherit          -> "uses" | nil
+instructionBlock -> ("new" | nil) VAR "=" ("line("|"arc(") (x|nil) y (x|nil) y (deg | nil) | instructionBlock
+markType         -> "line" | "arc"
+x                -> NUMBER
+y                -> NUMBER
+LETTERDEC        -> [A-Za-z_]
+NUMBERDEC        -> NUMBER+ ("." NUMBER+)?
+NUMBER           -> 0-9
+SYMBOLDEC
+OTHERDEC
+BOOL             -> "true" | "false"
+VAR
+
+
+
+expression     → literal
+               | unary
+               | binary
+               | grouping ;
+
+literal        → NUMBER | STRING | "true" | "false" | "nil" ;
+grouping       → "(" expression ")" ;
+unary          → ( "-" | "!" ) expression ;
+binary         → expression operator expression ;
+operator       → "==" | "!=" | "<" | "<=" | ">" | ">="
+               | "+"  | "-"  | "*" | "/" ;
+
+letter b {
+  new first = line(x1, y1, x2, y2) -- x1, x2 optional
+}

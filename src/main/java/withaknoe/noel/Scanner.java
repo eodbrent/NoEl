@@ -14,7 +14,7 @@ public class Scanner {
    private int line = 1;
    
    private static final Map<String, TokenType> keywords;
-   
+
    static {
        keywords = new HashMap<>();
        keywords.put("letter", TokenType.LETTER);
@@ -31,6 +31,20 @@ public class Scanner {
        keywords.put("middle", TokenType.MIDDLE);
        keywords.put("base", TokenType.BASE);
        keywords.put("descend", TokenType.DESCEND);
+       keywords.put("false", TokenType.FALSE);
+       keywords.put("true", TokenType.TRUE);
+       keywords.put("if", TokenType.IF);
+       keywords.put("else", TokenType.ELSE);
+       keywords.put("ifelse", TokenType.IFELSE);
+//       keywords.put("lbrace", TokenType.LBRACE);
+//       keywords.put("rbrace", TokenType.RBRACE);
+//       keywords.put("dot", TokenType.DOT);
+//       keywords.put("minus", TokenType.MINUS);
+//       keywords.put("plus", TokenType.PLUS);
+//       keywords.put("star", TokenType.STAR);
+//       keywords.put("dash", TokenType.DASH);
+//       keywords.put("quote", TokenType.QUOTE);
+//       keywords.put("string", TokenType.STRING);
    }
    
    public Scanner(String source) {
@@ -46,16 +60,31 @@ public class Scanner {
        tokens.add(new Token(TokenType.EOF, "", null, line));
        return tokens;
    }
-   
+
+   // TODO: are strings necessary? implement just in case ***
    private void scanToken() {
        char c = advance();
        switch (c) {
            case '(': addToken(TokenType.LPAREN); break;
            case ')': addToken(TokenType.RPAREN); break;
-           case ':': addToken(TokenType.COLON); break;
-           case ',': addToken(TokenType.COMMA); break;
-           
-           case '\n': line++; break;
+           case '{': addToken(TokenType.LBRACE); break;
+           case '}': addToken(TokenType.RBRACE); break;
+           case ':': addToken(TokenType.COLON) ; break;
+           case ',': addToken(TokenType.COMMA) ; break;
+           case '+': addToken((TokenType.PLUS)); break;
+           case '.': addToken(TokenType.DOT)   ; break;
+           case '*': addToken(TokenType.STAR)  ; break;
+           case '-': // TODO NOT ENTERING MATCH CASE CONSISTENTLY
+               if (match('-')) { // -- comment, full line/ignore all
+                   while (peek() != '\n' && !isAtEnd()) advance(); // keep consuming until line return
+               } else {
+                   addToken(TokenType.DASH);
+               }
+           case '"': string(); break;
+//           LETTER, NUMBER, SYMBOL, OTHER,
+//           USES, LINE, ARC, ROTATE, SCALE, END,
+//           FALSE, TRUE, IF, ELSE, IFELSE,
+           case '\n': line++ ; break;
            case  ' ':
            case '\r':
            case '\t': break; //ignore white space
@@ -65,17 +94,44 @@ public class Scanner {
                } else if (isAlpha(c)) {
                    identifier();
                } else {
-                   System.err.println("Unexpected character: " + c);
+                   NoEl.error(line, "Unexpected character: " + c);
                }
                break;
        }
    }
-   
+
+   //
+   private void string() {
+       while (peek() != '"' && !isAtEnd()) {
+           if (peek() == '\n') line++;
+           advance();
+       }
+
+       if (isAtEnd()) {
+           NoEl.error(line, "Unterminated string.");
+           return;
+       }
+
+       advance();
+
+       // need to trim surrounding quotes
+       String value = source.substring(start + 1, current - 1);
+       addToken(TokenType.STRING, value);
+   }
+
+   private boolean match(char expected) {
+       if (isAtEnd()) return false;
+       if (source.charAt(current) != expected) return false;
+
+       current++;
+       return true;
+   }
    private void identifier() {
        while (isAlphaNumeric(peek())) advance();
        String text = source.substring(start, current);
        
-       TokenType type = keywords.getOrDefault(text, TokenType.IDENTIFIER);
+       TokenType type = keywords.get(text);
+       if (type == null) type = TokenType.IDENTIFIER;
        addToken(type);
    }
    
@@ -91,7 +147,7 @@ public class Scanner {
    }
    
    private boolean isAlpha(char c) {
-       return Character.isLetter(c);
+       return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_';
    }
    
    private boolean isAlphaNumeric(char c) {

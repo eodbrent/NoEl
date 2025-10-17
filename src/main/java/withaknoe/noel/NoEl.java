@@ -12,7 +12,8 @@ import java.util.List;
  *
  * @author Brent
  *      Essentially the same REPL setup as Nystrom's.
- * 
+ *
+ *  rules / productions (produce grammar strings) => gen strings / derivations
  */
 public class NoEl {
     static boolean hadError = false;
@@ -32,7 +33,8 @@ public class NoEl {
         run(new String(bytes, Charset.defaultCharset()));
         if (hadError) System.exit(65);
     }
-    
+
+    // REPL
     private static void runPrompt() throws IOException {
         InputStreamReader input = new InputStreamReader(System.in);
         BufferedReader reader = new BufferedReader(input);
@@ -49,7 +51,7 @@ public class NoEl {
     private static void run(String source) {
         Scanner scanner = new Scanner(source);
         List<Token> tokens = scanner.scanTokens();
-        
+        // prints tokens as they're scanned
         for (Token token : tokens) {
             System.out.println(token);
         }
