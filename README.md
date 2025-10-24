@@ -1,7 +1,7 @@
 # Handwriting Language Project
 
-Inspired by Crafting Interpreters by Robert Nystrom (https://craftinginterpreters.com/), this is an experimental project where I'm creating a simple, code-based language designed to generate handwriting and fonts. The idea is to encode each character using drawing instructions - essentially programming your own font or even your personal handwriting style.
-
+Inspired by [Crafting Interpreters](https://craftinginterpreters.com/) by Robert Nystrom, this is an experimental project where I'm creating a simple, code-based language designed to generate handwriting and fonts. The idea is to encode each character using drawing instructions - essentially programming your own font or even your personal handwriting style.
+###### *Why the name? There’s no “e” in my last name, but people often add one when writing or typing it. So the name means “No E Language” - with the capital E emphasizing both the missing letter and distinguishing it from the word “Noel.”*
 ---
 
 ## 🎨 What This Language Does
