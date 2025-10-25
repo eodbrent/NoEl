@@ -14,7 +14,34 @@ Inspired by [Crafting Interpreters](https://craftinginterpreters.com/) by Robert
   - Shape (line, curve, dot, etc.)
 - Supports **custom fonts** and **randomization** for stylistic variation.
 
-Example for a lowercase `i`:
+V 0.0.2 Example for a lowercase `i`:  
+Each letter has customizable width.  
+Coordinates are relative to the letter’s box, where:  
+    The x/y origin is at the middle of the box (.5 = 50%).  
+    
+All coordinates are ratios of the total height.  
+Values like .5 represent percentages (e.g., .5 = 50%).  
+
+```
+settings {
+  monospace = false         -- if true, ignores all custom symbol widths
+  mono_width = 600          -- used only when monospace = true
+  font_height = 1000        -- normalized height for export (e.g. FontForge)
+  
+  -- height proportions (ascender → descender = 100%)
+  ascender = 0.33           -- middle to ascender
+  baseline = 0.33           -- base to middle
+  descender = 0.33          -- descender to base
+}
+
+letter i {
+  width = 0.1               -- 10% of total height
+  line iLine = 0.5, middle - 0.1, 0.5, baseline -- x,y , x,y
+  dot  iDot  = 0.5, middle + 0.1
+}
+```
+
+V 0.0.1 Example for a lowercase `i`:
 
 ```
 LETTER i
